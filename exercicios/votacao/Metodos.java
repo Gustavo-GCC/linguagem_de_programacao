@@ -41,19 +41,19 @@ public class Metodos{
 
             switch (input){
                 case 1:
-
+                    eleitoresSecao();
                     break;
 
                 case 2:
-
+                    secaoMaiorMenor();
                     break;
 
                 case 3:
-
+                    votosCandidato();
                     break;
 
                 case 4:
-
+                    topDez();
                     break;
 
                 case 9:

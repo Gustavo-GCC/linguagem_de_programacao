@@ -19,15 +19,15 @@ public class Principal{
 
             switch (entrada){
             case 1:
-
+                metodos.
                 break;
 
             case 2:
-
+                metodos.
                 break;
 
             case 3:
-
+                metodos.
                 break;
 
             case 4:
