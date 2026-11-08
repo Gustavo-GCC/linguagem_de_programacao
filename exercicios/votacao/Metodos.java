@@ -10,7 +10,7 @@ public class Metodos{
     Random rand = new Random();
 
     File arquivo = new File("Votação2021.txt");
-    Scanner ler = new Scanner(arquivo);
+    //Scanner ler = new Scanner(arquivo);
 
     Votacao[] votacao = new Votacao[200];
 
@@ -124,22 +124,22 @@ public class Metodos{
     }
 
 
-    public Votacao[] lerArquivo(){
-        String[] dados = new String[2];
+    // public Votacao[] lerArquivo(){
+    //     String[] dados = new String[2];
 
-        try{
-            while (ler.hasNextLine()){
-                String linha = ler.nextLine();
-                dados[] = linha.split(";");
-            }
+    //     try{
+    //         while (ler.hasNextLine()){
+    //             String linha = ler.nextLine();
+    //             dados[] = linha.split(";");
+    //         }
 
-            ler.close();    
-            return dados;                
-        }
+    //         ler.close();    
+    //         return dados;                
+    //     }
 
-        catch (IOException e){
-            System.out.println("\n--->ERRO<---\n");
-            return null;
-        }
-    }
+    //     catch (IOException e){
+    //         System.out.println("\n--->ERRO<---\n");
+    //         return null;
+    //     }
+    // }
 }
