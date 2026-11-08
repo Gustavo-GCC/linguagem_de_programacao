@@ -9,10 +9,10 @@ public class Apuracao
         this(0, 0, 0);
     }
 
-    Apuracao(int secaoo, int candidatoCodigo, int eleitorNumero)
+    Apuracao(int secao, int codigoCandidato, int numeroEleitor)
     {
-        secao = secaoo;
-        codigoCandidato = candidatoCodigo;
-        numeroEleitor = eleitorNumero;
+        this.secao = secao;
+        this.codigoCandidato = codigoCandidato;
+        this.numeroEleitor = numeroEleitor;
     }
 }

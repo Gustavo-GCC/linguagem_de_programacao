@@ -9,10 +9,10 @@ public class Transmissao
         this("", "", 0);
     }
 
-    Transmissao(String nome, String sobrenome, int nota)
+    Transmissao(String nomeAluno, String sobrenomeAluno, int notaAluno)
     {
-        nomeAluno = nome;
-        sobrenomeAluno = sobrenome;
-        notaAluno = nota;
+        this.nomeAluno = nomeAluno;
+        this.sobrenomeAluno = sobrenomeAluno;
+        this.notaAluno = notaAluno;
     }
 }

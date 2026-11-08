@@ -3,7 +3,8 @@ import java.util.Scanner;
 
 public class Metodos
 {
-    Transmissao[] aluno = new Transmissao[3];
+    int x = 2; 
+    Transmissao[] aluno = new Transmissao[this.x];
 
 
     public void carregarAlunos()
@@ -11,13 +12,13 @@ public class Metodos
         Scanner scan = new Scanner(System.in);
 
 
-        for (int k = 0; k < 3; k++)
+        for (int k = 0; k < this.x; k++)
         {
             aluno[k] = new Transmissao();
         }
 
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < this.x; i++)
         {
             System.out.println("\n\n->Digite o nome do " + (i + 1) + "° aluno");
             aluno[i].nomeAluno = scan.nextLine();
@@ -35,7 +36,7 @@ public class Metodos
 
     public void mostrarAlunos()
     {
-        for (int j = 0; j < 3; j++)
+        for (int j = 0; j < this.x; j++)
         {
             System.out.println("\n\nNOME: " + aluno[j].nomeAluno + "\nSOBRENOME: " + aluno[j].sobrenomeAluno + "\nNOTA: " + aluno[j].notaAluno + "\n");
         }

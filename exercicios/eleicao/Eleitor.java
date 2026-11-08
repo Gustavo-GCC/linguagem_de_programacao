@@ -9,10 +9,10 @@ public class Eleitor
         this(0, "", 0);
     }
 
-    Eleitor(int eleitorNumero, String eleitorNome, int secaoo)
+    Eleitor(int numeroEleitor, String nomeEleitor, int secao)
     {
-        numeroEleitor = eleitorNumero;
-        nomeEleitor = eleitorNome;
-        secao = secaoo;
+        this.numeroEleitor = numeroEleitor;
+        this.nomeEleitor = nomeEleitor;
+        this.secao = secao;
     }
 }

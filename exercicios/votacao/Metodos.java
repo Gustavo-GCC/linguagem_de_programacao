@@ -1,32 +1,88 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Metodos{
     Scanner scan = new Scanner(System.in);
     Random rand = new Random();
 
-    public void carregarSecaoECandidato(){
-        Votacao[] votacao = new Votacao[2];
+    File arquivo = new File("Votação2021.txt");
+    Scanner ler = new Scanner(arquivo);
 
-        for (int i = 0; i < 2; i++){
+    Votacao[] votacao = new Votacao[200];
+
+    int k = 0;
+
+    public void carregarSecaoECandidato(){
+
+        for (int i = 0; i < votacao.length; i++){
             votacao[i] = new Votacao();
         }
 
-        for (int j = 0; j < 2; j++){
-            System.out.println("Qual é a seção?");
-            votacao[j].numeroSecao = rand.nextInt(10);
+        for (int j = 0; j < votacao.length; j++){
+            //System.out.println("Qual é a seção?");
+            votacao[j].numeroSecao = rand.nextInt(11);
 
-            System.out.println("Digite o número do seu candidato:");
-            votacao[j].numeroCandidato = rand.nextInt(300);
+            //System.out.println("Digite o número do seu candidato:");
+            votacao[j].numeroCandidato = rand.nextInt(301);
         }
+
+        System.out.println("Eleitor " + (k + 1) + "° registrado com sucesso!");
     }
 
+    //#1
     public void cadastrarRegistros(){
-        for (int k = 0; k < 200; k++){
+        while (this.k < 200){
             carregarSecaoECandidato();
+            k++;
         }
     }
 
+    //#2
+    public void ordenarSecao(){
+        int temp = 0;
+
+        for (int m = 0; m < 199; m++){
+            for (int n = (m + 1); n < votacao.length; n++){
+                if (votacao[m].numeroSecao > votacao[n].numeroSecao){
+
+                    temp = votacao[m].numeroSecao;
+                    votacao[m].numeroSecao = votacao[n].numeroSecao;
+                    votacao[n].numeroSecao = temp;
+                }
+            }
+        }
+
+        for (int y = 0; y < votacao.length; y++){
+            System.out.println(votacao[y].numeroSecao);
+        }
+
+        System.out.println("\nDados classificados!\n");
+    }
+
+    //#3
+    public void gravarRegistros(){
+        try{
+            PrintWriter  gravar = new PrintWriter(new FileWriter("Votação2021.txt"));
+
+            for (Votacao linha : votacao){
+                gravar.println(linha.numeroSecao + ";" + linha.numeroCandidato);
+            }
+
+            gravar.close();
+
+        } catch (IOException e){
+
+            System.out.println("\n--->ERRO<---\n");
+        }
+
+        System.out.println("\nArquivo Gerado!\n");
+    }
+
+    //#4
     public void mostrarIndicadores(){
         int input = 0;
 
@@ -41,19 +97,19 @@ public class Metodos{
 
             switch (input){
                 case 1:
-                    eleitoresSecao();
+                    //eleitoresSecao();
                     break;
 
                 case 2:
-                    secaoMaiorMenor();
+                    //secaoMaiorMenor();
                     break;
 
                 case 3:
-                    votosCandidato();
+                    //votosCandidato();
                     break;
 
                 case 4:
-                    topDez();
+                    //topDez();
                     break;
 
                 case 9:
@@ -64,6 +120,26 @@ public class Metodos{
                     System.out.println("\nNÚMERO INVÁLIDO\nTENTE NOVAMENTE");
                     break;
             }
+        }
+    }
+
+
+    public Votacao[] lerArquivo(){
+        String[] dados = new String[2];
+
+        try{
+            while (ler.hasNextLine()){
+                String linha = ler.nextLine();
+                dados[] = linha.split(";");
+            }
+
+            ler.close();    
+            return dados;                
+        }
+
+        catch (IOException e){
+            System.out.println("\n--->ERRO<---\n");
+            return null;
         }
     }
 }

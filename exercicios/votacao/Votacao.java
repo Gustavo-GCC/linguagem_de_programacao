@@ -6,8 +6,8 @@ public class Votacao{
         this(0, 0);
     }
 
-    Votacao(int nSec, int nCan){
-        numeroSecao = nSec;
-        numeroCandidato = nCan;
+    Votacao(int numeroSecao, int numeroCandidato){
+        this.numeroSecao = numeroSecao;
+        this.numeroCandidato = numeroCandidato;
     }
 }

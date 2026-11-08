@@ -9,25 +9,25 @@ public class Principal{
         int entrada = 0;
 
         while (entrada != 9){
-            System.out.println("\n------------------------------------------------");
+            System.out.println("\n\n------------------------------------------------");
             System.out.println("\t\tSISTEMA DE VOTAÇÃO\n1-) Carregar Seção/Número Eleitor\n2-) Classificar por Seção");
             System.out.println("3-) Gravar Registros\n4-) Mostrar Indicadores\n9-) Finalizar");
             System.out.println("------------------------------------------------");
 
-            System.out.println("\n\nDigite sua opção:");
+            System.out.println("\n\nDigite o número que deseja:");
             entrada = scan.nextInt();
 
             switch (entrada){
             case 1:
-                metodos.
+                metodos.cadastrarRegistros();
                 break;
 
             case 2:
-                metodos.
+                metodos.ordenarSecao();
                 break;
 
             case 3:
-                metodos.
+                metodos.gravarRegistros();
                 break;
 
             case 4:
