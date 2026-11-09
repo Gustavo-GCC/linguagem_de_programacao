@@ -37,6 +37,7 @@ public class Metodos{
         //System.out.println("Eleitor " + (k + 1) + "° registrado com sucesso!");
     }
 
+
     //#1
     public void cadastrarRegistros(){
         while (this.k < 200){
@@ -44,6 +45,7 @@ public class Metodos{
             k++;
         }
     }
+
 
     //#2
     public void ordenarSecao(){
@@ -67,6 +69,7 @@ public class Metodos{
         System.out.println("\nDados classificados!\n");
     }
 
+
     //#3
     public void gravarRegistros(){
         try{
@@ -89,6 +92,7 @@ public class Metodos{
 
         System.out.println("\nArquivo Gerado!\n");
     }
+
 
     public void apagarArquivo(){
         if (arquivo.exists()){
@@ -152,7 +156,7 @@ public class Metodos{
                     break;
 
                 case 4:
-                    // topDezCandidatos();
+                    topDezCandidatos();
                     break;
 
                 case 9:
@@ -225,24 +229,41 @@ public class Metodos{
 
 
     //#4.4
-    // public void topDezCandidatos(){
-    //     Votacao aux = new Votacao();
+    public void topDezCandidatos(){
+        Votacao aux = new Votacao();
+        int prov = 0;
+        Votacao[] vetorAuxiliar = new Votacao[dados.length];
 
-    //     for (int c = 0; c < contadorCandidato.length - 1; c++) {
-    //         for (int d = (c + 1); d < contadorCandidato.length; d++) {
+        for (int p = 0; p < dados.length; p++){
+            vetorAuxiliar[p] = dados[p];
+        }        
+
+        for (int c = 0; c < (contadorCandidato.length - 1); c++) {
+            for (int d = (c + 1); d < contadorCandidato.length; d++) {
                 
-    //             if (contadorCandidato[c].numeroCandidato < contadorCandidato[d].numeroCandidato){
-    //                 aux = contadorCandidato[c];
-    //                 contadorCandidato[c] = contadorCandidato[d];
-    //                 contadorCandidato[d] = aux;
-    //             }
-    //         }
-    //     }
+                if (contadorCandidato[c] < contadorCandidato[d]){
+                    prov = contadorCandidato[c];
+                    contadorCandidato[c] = contadorCandidato[d];
+                    contadorCandidato[d] = prov;
+                }
+            }
+        }
 
-    //     System.out.println("\nOs top 10 candidados mais votados são estes:");
+        for (int q = 0; q < (vetorAuxiliar.length - 1); q++){
+            for (int r = (q + 1); r < vetorAuxiliar.length; r++){
 
-    //     for (int e = 0; e < 10; e++){
-    //         System.out.println("\tCandidato " + contadorCandidato[e].numeroCandidato + " — " + contadorCandidato[e] + " votos");
-    //     }
-    // }
+                if (vetorAuxiliar[q].numeroCandidato < vetorAuxiliar[r].numeroCandidato){
+                    aux = vetorAuxiliar[q];
+                    vetorAuxiliar[q] = vetorAuxiliar[r];
+                    vetorAuxiliar[r] = aux;
+                }
+            }
+        }
+
+        System.out.println("\nOs top 10 candidados mais votados são estes:");
+
+        for (int e = 0; e < 10; e++){
+            System.out.println("\tCandidato " + vetorAuxiliar[e].numeroCandidato + " -- " + contadorCandidato[e] + " votos");
+        }
+    }
 }
