@@ -8,13 +8,15 @@ import java.io.IOException;
 public class Metodos{
     Scanner scan = new Scanner(System.in);
     Random rand = new Random();
-
     File arquivo = new File("Votação2021.txt");
-    //Scanner ler = new Scanner(arquivo);
 
     Votacao[] votacao = new Votacao[200];
+    Votacao[] dados = new Votacao[200];
 
     int k = 0;
+    int[] contadorSecao = new int[11];
+    int[] contadorCandidato = new int[301];
+
 
     public void carregarSecaoECandidato(){
 
@@ -28,9 +30,11 @@ public class Metodos{
 
             //System.out.println("Digite o número do seu candidato:");
             votacao[j].numeroCandidato = rand.nextInt(301);
+            
+            System.out.println("Seção: " + votacao[j].numeroSecao + "\tCandidato: " + votacao[j].numeroCandidato);
         }
 
-        System.out.println("Eleitor " + (k + 1) + "° registrado com sucesso!");
+        //System.out.println("Eleitor " + (k + 1) + "° registrado com sucesso!");
     }
 
     //#1
@@ -43,22 +47,22 @@ public class Metodos{
 
     //#2
     public void ordenarSecao(){
-        int temp = 0;
+        Votacao temp = new Votacao();
 
         for (int m = 0; m < 199; m++){
             for (int n = (m + 1); n < votacao.length; n++){
                 if (votacao[m].numeroSecao > votacao[n].numeroSecao){
 
-                    temp = votacao[m].numeroSecao;
-                    votacao[m].numeroSecao = votacao[n].numeroSecao;
-                    votacao[n].numeroSecao = temp;
+                    temp = votacao[m];
+                    votacao[m] = votacao[n];
+                    votacao[n] = temp;
                 }
             }
         }
 
-        for (int y = 0; y < votacao.length; y++){
-            System.out.println(votacao[y].numeroSecao);
-        }
+        // for (int y = 0; y < votacao.length; y++){
+        //     System.out.println(votacao[y].numeroSecao);
+        // }
 
         System.out.println("\nDados classificados!\n");
     }
@@ -69,7 +73,11 @@ public class Metodos{
             PrintWriter  gravar = new PrintWriter(new FileWriter("Votação2021.txt"));
 
             for (Votacao linha : votacao){
-                gravar.println(linha.numeroSecao + ";" + linha.numeroCandidato);
+                gravar.print(linha.numeroSecao + ";" + linha.numeroCandidato);
+
+                if (linha != votacao[votacao.length - 1]){
+                    gravar.println();
+                }
             }
 
             gravar.close();
@@ -81,6 +89,41 @@ public class Metodos{
 
         System.out.println("\nArquivo Gerado!\n");
     }
+
+    public void apagarArquivo(){
+        if (arquivo.exists()){
+            arquivo.delete();
+            System.out.println("\nAntigo arquivo deletado para que não haja problemas nesta execução");
+        }
+    }
+
+
+    //#4
+    public void lerArquivo(){
+        int z = 0;
+
+        try{
+            Scanner ler = new Scanner(arquivo);
+
+            while (ler.hasNextLine()){
+                String linha = ler.nextLine();
+                String[] numerosLinha = linha.split(";");
+
+                int secao = Integer.parseInt(numerosLinha[0]);
+                int candidato = Integer.parseInt(numerosLinha[1]);
+
+                dados[z] = new Votacao(secao, candidato);
+                z++;
+            }
+
+            ler.close();
+        }
+
+        catch (IOException e){
+            System.out.println("\n--->ERRO<---\n");
+        }
+    }
+
 
     //#4
     public void mostrarIndicadores(){
@@ -97,23 +140,23 @@ public class Metodos{
 
             switch (input){
                 case 1:
-                    //eleitoresSecao();
+                    eleitoresSecao();
                     break;
 
                 case 2:
-                    //secaoMaiorMenor();
+                    secaoMaiorMenor();
                     break;
 
                 case 3:
-                    //votosCandidato();
+                    votosCandidato();
                     break;
 
                 case 4:
-                    //topDez();
+                    // topDezCandidatos();
                     break;
 
                 case 9:
-                    System.out.println("\nFim do Programa");
+                    System.out.println("\nRetornando ao SISTEMA DE VOTAÇÃO");
                     break;
 
                 default:
@@ -124,22 +167,82 @@ public class Metodos{
     }
 
 
-    // public Votacao[] lerArquivo(){
-    //     String[] dados = new String[2];
+    //#4.1
+    public void eleitoresSecao(){
 
-    //     try{
-    //         while (ler.hasNextLine()){
-    //             String linha = ler.nextLine();
-    //             dados[] = linha.split(";");
+        for (int f = 0; f < dados.length; f++){
+            contadorSecao[dados[f].numeroSecao]++;
+        }
+        
+        System.out.println("");
+
+        for (int g = 0; g < contadorSecao.length; g++){
+            System.out.println("Quantidade de Eleitores na seção " + g + ":\t" + contadorSecao[g]);
+        }
+    }
+
+
+    //#4.2
+    public void secaoMaiorMenor(){
+        int maior = 0, menor = 0;
+        
+        for (int h : contadorSecao){
+
+            if (h == 0){
+                maior = contadorSecao[h];
+                menor = contadorSecao[h];
+            }
+
+            if (contadorSecao[h] > maior){
+                maior = contadorSecao[h];
+            } else if (contadorSecao[h] < menor){
+                menor = contadorSecao[h];
+            }
+            // } else if (contadorSecao[h] == maior){
+
+            // } else if (contadorSecao[h] == menor){
+
+            // }
+        }
+        
+        System.out.println("\nMENOR: " + menor + "\nMAIOR: " + maior);
+    }
+
+
+    //#4.3
+    public void votosCandidato(){
+        
+        for (int a = 0; a < dados.length; a++){
+            contadorCandidato[dados[a].numeroCandidato]++;
+        }
+
+        System.out.println("");
+
+        for (int b = 0; b < contadorCandidato.length; b++){
+            System.out.println("O candidato cujo número é " + b + " recebeu " + contadorCandidato[b] + " votos");
+        }
+    }
+
+
+    //#4.4
+    // public void topDezCandidatos(){
+    //     Votacao aux = new Votacao();
+
+    //     for (int c = 0; c < contadorCandidato.length - 1; c++) {
+    //         for (int d = (c + 1); d < contadorCandidato.length; d++) {
+                
+    //             if (contadorCandidato[c].numeroCandidato < contadorCandidato[d].numeroCandidato){
+    //                 aux = contadorCandidato[c];
+    //                 contadorCandidato[c] = contadorCandidato[d];
+    //                 contadorCandidato[d] = aux;
+    //             }
     //         }
-
-    //         ler.close();    
-    //         return dados;                
     //     }
 
-    //     catch (IOException e){
-    //         System.out.println("\n--->ERRO<---\n");
-    //         return null;
+    //     System.out.println("\nOs top 10 candidados mais votados são estes:");
+
+    //     for (int e = 0; e < 10; e++){
+    //         System.out.println("\tCandidato " + contadorCandidato[e].numeroCandidato + " — " + contadorCandidato[e] + " votos");
     //     }
     // }
 }

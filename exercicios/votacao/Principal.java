@@ -8,6 +8,8 @@ public class Principal{
 
         int entrada = 0;
 
+        metodos.apagarArquivo();
+
         while (entrada != 9){
             System.out.println("\n\n------------------------------------------------");
             System.out.println("\t\tSISTEMA DE VOTAÇÃO\n1-) Carregar Seção/Número Eleitor\n2-) Classificar por Seção");
@@ -31,6 +33,7 @@ public class Principal{
                 break;
 
             case 4:
+                metodos.lerArquivo();
                 metodos.mostrarIndicadores();
                 break;
 
